@@ -33,7 +33,7 @@ public class SecurityConfiguration {
             .csrf(AbstractHttpConfigurer::disable)  // csrf를 비활성화
             .cors(cors -> cors.configurationSource(securityCorsConfigurationSource()))
             // .cors(withDefaults())
-            .cors(cors -> cors.disable())
+            // .cors(cors -> cors.disable())
             .authorizeHttpRequests((auth) ->
                     auth
                         .requestMatchers("/api/v1/auth/**")
@@ -72,6 +72,11 @@ public class SecurityConfiguration {
         config.setAllowedOrigins(Arrays.asList("https://localhost:3000", "http://localhost:3000"));
         config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         config.setAllowCredentials(true);
+
+
+        config.addAllowedHeader("*");
+
+
         source.registerCorsConfiguration("/**", config);
         return source;
     }
